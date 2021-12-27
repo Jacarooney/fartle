@@ -164,13 +164,13 @@ function draw() {
   //Messages
   push();
   noStroke();
-  textSize(height/65);
+  textSize(height/52);
   
   if (displayMessage && timer < displayTime){
     fill(220, 220);
-    rect(width/2, 0.42*height, 0.8*tW, tW/3);
+    rect(width/2, 0.4*height, 0.8*tW, tW/3);
     fill(20); 
-    text(message, width/2, 0.42*height);
+    text(message, width/2, 0.4*height);
     timer++;
   } else {
     displayMessage = false;
