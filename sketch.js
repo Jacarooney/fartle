@@ -1,5 +1,3 @@
-//ADD ANIMATIONS
-
 let tiles = [];
 let tW;
 let currentCol = 0;
@@ -14,6 +12,7 @@ let timer = 0;
 let currentLetters = [];
 
 let dictionary;
+let wordBank;
 let targetWord;
 
 
@@ -25,10 +24,11 @@ let keyboardY = 0;
 
 let unit = 4.5;
 
-let codeBoard = [11, 25, 23, 13, 2, 14, 15, 16, 7, 17, 18, 19, 27, 26, 8, 9, 0, 3, 12, 4, 6, 24, 1, 22, 5, 20];
+let codeBoard = [11, 26, 24, 13, 2, 14, 15, 16, 7, 17, 18, 19, 28, 27, 8, 9, 0, 3, 12, 4, 6, 25, 1, 23, 5, 22];
 
 function preload(){
   dictionary = loadStrings("dictionary.txt");
+  wordBank = loadStrings("Common5LetterWords.txt");
 }
 
 function setup() {
@@ -57,7 +57,7 @@ function setup() {
     }
   }
   
-  targetWord = random(dictionary);
+  targetWord = random(wordBank);
   
   keyboardX = width/2 - unit*44.5;
   keyboardY = height - unit*36.5;
