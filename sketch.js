@@ -303,6 +303,9 @@ class Tile{
       this.counter = 0;
     }
     
+    push();
+    strokeWeight(1.5);
+    
     if (this.state == "unfilled"){
       noFill();
       stroke(100);
@@ -318,6 +321,8 @@ class Tile{
     }
     
     square(this.x, this.y, this.size);
+    
+    pop();
     
     fill(250);
     textStyle(BOLD);
