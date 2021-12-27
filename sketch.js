@@ -1,3 +1,5 @@
+//ADD ANIMATIONS
+
 let tiles = [];
 let tW;
 let currentCol = 0;
@@ -57,7 +59,7 @@ function setup() {
     }
   }
   
-  targetWord = random(wordBank);
+  targetWord = random(wordBank).toUpperCase();
   
   keyboardX = width/2 - unit*44.5;
   keyboardY = height - unit*36.5;
