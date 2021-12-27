@@ -150,7 +150,7 @@ function keyPressed(){
           
           if (targetWord == currentWord){
             message = "YOU GOT IT!";
-            displayTime = 400;
+            displayTime = Infinity;
             displayMessage = true;
           } else if (currentRow == 5){
             message = targetWord;
