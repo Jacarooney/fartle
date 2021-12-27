@@ -29,7 +29,7 @@ let codes = [65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81,
 let codeBoard = [11, 25, 23, 13, 2, 14, 15, 16, 7, 17, 18, 19, 27, 26, 8, 9, 0, 3, 12, 4, 6, 24, 1, 22, 5, 20];
 
 function preload(){
-  dictionary = loadStrings("Common5LetterWords.txt");
+  dictionary = loadStrings("dictionary.txt");
 }
 
 function setup() {
@@ -37,15 +37,15 @@ function setup() {
   textAlign(CENTER, CENTER);
   rectMode(CENTER);
   
-  unit = height/150;
+  unit = height/160;
   
-  textSize(windowHeight/15);
+  textSize(windowHeight/17);
   tW = (textWidth("WORDLE"));
   
   for (let y = 0; y < 6; y++){
     for (let x = 0; x < 5; x++){
       xPos = map(x, 0, 4, width/2 - 0.7*tW, width/2 + 0.7*tW);
-      yPos = map(y, 0, 5, height/6, height/6+1.75*tW);
+      yPos = map(y, 0, 5, height/5, height/5+1.75*tW);
       tiles.push(new Tile(x, y, xPos, yPos, 0.32*tW));
     }
   }
@@ -53,7 +53,7 @@ function setup() {
   targetWord = random(dictionary);
   
   keyboardX = width/2 - unit*44.5;
-  keyboardY = height - unit*35;
+  keyboardY = height - unit*40;
 
   let currentX = keyboardX;
   let keySize;
@@ -80,10 +80,10 @@ function setup() {
 
 function windowResized(){
   resizeCanvas(windowWidth, windowHeight);
-  textSize(windowHeight/15);
+  textSize(windowHeight/17);
   tW = (textWidth("WORDLE"));
   
-  unit = height/150;
+  unit = height/160;
   
   
     for (let i = 0; i < 30; i++){
@@ -94,7 +94,7 @@ function windowResized(){
       }
       for (let y = 0; y < 6; y++){
         if (tiles[i].col == y){
-          tiles[i].y = map(y, 0, 5, height/6, height/6+1.75*tW);
+          tiles[i].y = map(y, 0, 5, height/5, height/5+1.75*tW);
         }
       }
       tiles[i].size = 0.32*tW;
@@ -102,7 +102,7 @@ function windowResized(){
   }
   
   keyboardX = width/2 - unit*44.5;
-  keyboardY = height - unit*35;
+  keyboardY = height - unit*40;
 
   let currentX = keyboardX;
   let keySize;
@@ -119,7 +119,7 @@ function windowResized(){
       } else if (keys[row][k].length > 1){
         keySize = unit*12.5;
       }
-      // keyboard.push(new Key(row, k, currentX, keyboardY + row*unit*11.5, keySize, keys[row][k], 'unused'));
+
       keyboard[i].x = currentX;
       keyboard[i].y = keyboardY + row*unit*11.5;
       keyboard[i].size = keySize;
@@ -170,18 +170,18 @@ function draw() {
   //Keyboard
   for (let k in keyboard){
     keyboard[k].update();
-    keyboard[k].hov();
+   // keyboard[k].hov();
   }
 
   //keyboard hover cursor change
-  if (mouseX > keyboardX &&
-      mouseX < keyboardX + 89*unit &&
-      mouseY > keyboardY &&
-      mouseY < keyboardY + 34*unit){
-        cursor(HAND);
-  } else {
-        cursor(ARROW);
-  }
+  // if (mouseX > keyboardX &&
+  //     mouseX < keyboardX + 89*unit &&
+  //     mouseY > keyboardY &&
+  //     mouseY < keyboardY + 34*unit){
+  //       cursor(HAND);
+  // } else {
+  //       cursor(ARROW);
+  // }
   
 }
 
@@ -192,8 +192,6 @@ function keyPressed(){
     currentLetters.push(codeBoard[keyCode-65]);
     currentCol += 1;
   }
-  
-  print(currentLetters);
   
   //Delete letters
   if (key == "Backspace" && currentCol > 0){
@@ -326,14 +324,29 @@ class Tile{
 
 }
 
+var released = true;
+
+function mouseReleased(){
+	released = true;
+	return false;
+}
+
 function mousePressed(){
+	
+	if(!released){
+		return;
+	}
+	released = false;
+
   for (let k in keyboard){
+    keyboard[k].hov();
     if (keyboard[k].hover){
+      keyboard[k].hover = false;
       
       if (keyboard[k].char != "DEL" && keyboard[k].char != "ENTER" && currentCol < 5){
         tiles[currentRow*5+currentCol].letter = keyboard[k].char;
-        currentCol += 1;
         currentLetters.push(k);
+        currentCol += 1;
       }
       
       
@@ -349,7 +362,7 @@ function mousePressed(){
     currentWord += tiles[currentRow*5+i].letter;
   }
   
-  //Verify word
+  // Verify word
   if (keyboard[k].char == "ENTER"){
     //Insufficient letters
     if (currentCol < 5){
