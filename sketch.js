@@ -37,23 +37,23 @@ function setup() {
   textAlign(CENTER, CENTER);
   rectMode(CENTER);
   
-  unit = height/160;
+  unit = height/210;
   
-  textSize(windowHeight/17);
+  textSize(windowHeight/21);
   tW = (textWidth("WORDLE"));
   
   for (let y = 0; y < 6; y++){
     for (let x = 0; x < 5; x++){
-      xPos = map(x, 0, 4, width/2 - 0.7*tW, width/2 + 0.7*tW);
-      yPos = map(y, 0, 5, height/5, height/5+1.75*tW);
-      tiles.push(new Tile(x, y, xPos, yPos, 0.32*tW));
+      xPos = map(x, 0, 4, width/2 - 0.8*tW, width/2 + 0.8*tW);
+      yPos = map(y, 0, 5, height/4, height/4+1.96*tW);
+      tiles.push(new Tile(x, y, xPos, yPos, 0.35*tW));
     }
   }
   
   targetWord = random(dictionary);
   
   keyboardX = width/2 - unit*44.5;
-  keyboardY = height - unit*40;
+  keyboardY = height - unit*50;
 
   let currentX = keyboardX;
   let keySize;
@@ -80,29 +80,29 @@ function setup() {
 
 function windowResized(){
   resizeCanvas(windowWidth, windowHeight);
-  textSize(windowHeight/17);
+  textSize(windowHeight/21);
   tW = (textWidth("WORDLE"));
   
-  unit = height/160;
+  unit = height/210;
   
   
     for (let i = 0; i < 30; i++){
       for (let x = 0; x < 5; x++){
         if (tiles[i].row == x){
-          tiles[i].initX = map(x, 0, 4, width/2 - 0.7*tW, width/2 + 0.7*tW);
+          tiles[i].initX = map(x, 0, 4, width/2 - 0.8*tW, width/2 + 0.8*tW);
         }
       }
       for (let y = 0; y < 6; y++){
         if (tiles[i].col == y){
-          tiles[i].y = map(y, 0, 5, height/5, height/5+1.75*tW);
+          tiles[i].y = map(y, 0, 5, height/4, height/4+1.96*tW);
         }
       }
-      tiles[i].size = 0.32*tW;
+      tiles[i].size = 0.35*tW;
     
   }
   
   keyboardX = width/2 - unit*44.5;
-  keyboardY = height - unit*40;
+  keyboardY = height - unit*50;
 
   let currentX = keyboardX;
   let keySize;
@@ -152,7 +152,7 @@ function draw() {
   //Messages
   push();
   noStroke();
-  textSize(height/45);
+  textSize(height/70);
   
   if (displayMessage && timer < displayTime){
     fill(220, 220);
@@ -480,7 +480,7 @@ class Key{
       
       rect(this.x, this.y, this.size, unit*10, unit/2);
       fill(230);
-      textSize(height/50);
+      textSize(height/75);
       text(this.char, this.x + this.size/2, this.y+unit*5);
     }
     pop();
