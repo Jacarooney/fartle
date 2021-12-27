@@ -1,4 +1,3 @@
-//SCALE TO WINDOW SIZE
 //ADD ANIMATIONS
 
 let tiles = [];
@@ -80,16 +79,16 @@ function draw() {
   }
   
   
-  //Errors
+  //Messages
   push();
   noStroke();
-  textSize(11);
+  textSize(height/40);
   
   if (displayMessage && timer < displayTime){
     fill(220);
-    rect(width/2, height/2, 0.8*tW, tW/3);
+    rect(width/2, 0.9*height, 0.8*tW, tW/3);
     fill(20); 
-    text(message, width/2, height/2);
+    text(message, width/2, 0.9*height);
     timer++;
   } else {
     displayMessage = false;
