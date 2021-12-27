@@ -29,7 +29,7 @@ let codes = [65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81,
 let codeBoard = [11, 25, 23, 13, 2, 14, 15, 16, 7, 17, 18, 19, 27, 26, 8, 9, 0, 3, 12, 4, 6, 24, 1, 22, 5, 20];
 
 function preload(){
-  dictionary = loadStrings("dictionary.txt");
+  dictionary = loadStrings("Common5LetterWords.txt");
 }
 
 function setup() {
