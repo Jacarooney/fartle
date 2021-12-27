@@ -25,7 +25,6 @@ let keyboardY = 0;
 
 let unit = 4.5;
 
-let codes = [65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90];
 let codeBoard = [11, 25, 23, 13, 2, 14, 15, 16, 7, 17, 18, 19, 27, 26, 8, 9, 0, 3, 12, 4, 6, 24, 1, 22, 5, 20];
 
 function preload(){
@@ -39,23 +38,29 @@ function setup() {
   
   pixelDensity(1);
   
-  unit = height/200;
+  if (width < 0.75*height){
+    unit = width/92;
+  } else {
+    unit = height/120;
+  }
+  
+  
   
   textSize(windowHeight/19);
   tW = (textWidth("WORDLE"));
   
   for (let y = 0; y < 6; y++){
     for (let x = 0; x < 5; x++){
-      xPos = map(x, 0, 4, width/2 - 0.8*tW, width/2 + 0.8*tW);
-      yPos = map(y, 0, 5, height/5, height/5+2*tW);
-      tiles.push(new Tile(x, y, xPos, yPos, 0.36*tW));
+      xPos = map(x, 0, 4, width/2 - 0.76*tW, width/2 + 0.76*tW);
+      yPos = map(y, 0, 5, height/5.65, height/5.65+1.93*tW);
+      tiles.push(new Tile(x, y, xPos, yPos, 0.35*tW));
     }
   }
   
   targetWord = random(dictionary);
   
   keyboardX = width/2 - unit*44.5;
-  keyboardY = height - unit*50;
+  keyboardY = height - unit*36.5;
 
   let currentX = keyboardX;
   let keySize;
@@ -72,7 +77,7 @@ function setup() {
       } else if (keys[row][k].length > 1){
         keySize = unit*12.5;
       }
-      keyboard.push(new Key(row, k, currentX, keyboardY + row*unit*11.5, keySize, keys[row][k], 'unfilled'));
+      keyboard.push(new Key(row, k, currentX, keyboardY + row*unit*11.85, keySize, keys[row][k], 'unfilled'));
       currentX += keySize + unit;
       i++;
     }
@@ -85,26 +90,30 @@ function windowResized(){
   textSize(windowHeight/19);
   tW = (textWidth("WORDLE"));
   
-  unit = height/200;
+  if (width < 0.75*height){
+    unit = width/92;
+  } else {
+    unit = height/120;
+  }
   
   
     for (let i = 0; i < 30; i++){
       for (let x = 0; x < 5; x++){
         if (tiles[i].row == x){
-          tiles[i].initX = map(x, 0, 4, width/2 - 0.8*tW, width/2 + 0.8*tW);
+          tiles[i].initX = map(x, 0, 4, width/2 - 0.76*tW, width/2 + 0.76*tW);
         }
       }
       for (let y = 0; y < 6; y++){
         if (tiles[i].col == y){
-          tiles[i].y = map(y, 0, 5, height/5, height/5+2*tW);
+          tiles[i].y = map(y, 0, 5, height/5.65, height/5.65+1.93*tW);
         }
       }
-      tiles[i].size = 0.36*tW;
+      tiles[i].size = 0.35*tW;
     
   }
   
   keyboardX = width/2 - unit*44.5;
-  keyboardY = height - unit*50;
+  keyboardY = height - unit*36.5;
 
   let currentX = keyboardX;
   let keySize;
@@ -123,7 +132,7 @@ function windowResized(){
       }
 
       keyboard[i].x = currentX;
-      keyboard[i].y = keyboardY + row*unit*11.5;
+      keyboard[i].y = keyboardY + row*unit*11.85;
       keyboard[i].size = keySize;
       
       currentX += keySize + unit;
@@ -135,14 +144,15 @@ function windowResized(){
 }
 
 function draw() {
-  background(30);
+  background(15);
   
   
   //Heading
-  fill(200);
-  text("WORDY", width/2, height/20);
+  fill(230);
+  textSize(height/20);
+  text("WORDY", width/2, height/28);
   stroke(100);
-  line(width/2 - tW, height/12, width/2 + tW, height/12);
+  line(width/2 - 1.43*tW, height/15, width/2 + 1.43*tW, height/15);
   
   
   //Grid
@@ -172,7 +182,6 @@ function draw() {
   //Keyboard
   for (let k in keyboard){
     keyboard[k].update();
-   // keyboard[k].hov();
   }
 
   //keyboard hover cursor change
@@ -308,25 +317,27 @@ class Tile{
     
     if (this.state == "unfilled"){
       noFill();
-      stroke(100);
+      stroke(70);
     } else if (this.state == "filled"){
       stroke(60);
       fill(60);
     } else if (this.state == "match"){
-      stroke(100, 170, 245);
-      fill(100, 170, 245);
+      stroke(125, 190, 255);
+      fill(125, 190, 255);
     } else if (this.state == "perfect"){
-      stroke(224, 112, 31);
-      fill(224, 112, 31);
+      stroke(245, 132, 61);
+      fill(245, 132, 61);
     }
     
     square(this.x, this.y, this.size);
     
-    pop();
+    
     
     fill(250);
     textStyle(BOLD);
+    textSize(height/25);
     text(this.letter, this.x, this.y);
+    pop();
   }
 
 }
@@ -476,19 +487,19 @@ class Key{
     if(this.size != unit*3.5){
       noStroke();
     if (this.state == "unfilled"){
-      fill(140);
+      fill(130);
     } else if (this.state == "filled"){
       fill(60);
     } else if (this.state == "match"){
-      fill(100, 170, 245);
+      fill(125, 190, 255);
     } else if (this.state == "perfect"){
-      fill(224, 112, 31);
+      fill(245, 132, 61);
     }
       
-      rect(this.x, this.y, this.size, unit*10, unit/2);
+      rect(this.x, this.y, this.size, unit*10.5, 0.8*unit);
       fill(230);
-      textSize(height/72);
-      text(this.char, this.x + this.size/2, this.y+unit*5);
+      textSize(2.5*unit);
+      text(this.char, this.x + this.size/2, this.y+unit*5.4);
     }
     pop();
   }
