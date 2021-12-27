@@ -82,7 +82,7 @@ function draw() {
   //Messages
   push();
   noStroke();
-  textSize(height/40);
+  textSize(height/45);
   
   if (displayMessage && timer < displayTime){
     fill(220);
