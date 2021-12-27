@@ -37,16 +37,16 @@ function setup() {
   textAlign(CENTER, CENTER);
   rectMode(CENTER);
   
-  unit = height/220;
+  unit = height/200;
   
-  textSize(windowHeight/22);
+  textSize(windowHeight/19);
   tW = (textWidth("WORDLE"));
   
   for (let y = 0; y < 6; y++){
     for (let x = 0; x < 5; x++){
-      xPos = map(x, 0, 4, width/2 - 0.7*tW, width/2 + 0.7*tW);
-      yPos = map(y, 0, 5, height/4, height/4+1.75*tW);
-      tiles.push(new Tile(x, y, xPos, yPos, 0.32*tW));
+      xPos = map(x, 0, 4, width/2 - 0.8*tW, width/2 + 0.8*tW);
+      yPos = map(y, 0, 5, height/5, height/5+2*tW);
+      tiles.push(new Tile(x, y, xPos, yPos, 0.36*tW));
     }
   }
   
@@ -80,24 +80,24 @@ function setup() {
 
 function windowResized(){
   resizeCanvas(windowWidth, windowHeight);
-  textSize(windowHeight/22);
+  textSize(windowHeight/19);
   tW = (textWidth("WORDLE"));
   
-  unit = height/220;
+  unit = height/200;
   
   
     for (let i = 0; i < 30; i++){
       for (let x = 0; x < 5; x++){
         if (tiles[i].row == x){
-          tiles[i].initX = map(x, 0, 4, width/2 - 0.7*tW, width/2 + 0.7*tW);
+          tiles[i].initX = map(x, 0, 4, width/2 - 0.8*tW, width/2 + 0.8*tW);
         }
       }
       for (let y = 0; y < 6; y++){
         if (tiles[i].col == y){
-          tiles[i].y = map(y, 0, 5, height/4, height/4+1.75*tW);
+          tiles[i].y = map(y, 0, 5, height/5, height/5+2*tW);
         }
       }
-      tiles[i].size = 0.32*tW;
+      tiles[i].size = 0.36*tW;
     
   }
   
@@ -152,7 +152,7 @@ function draw() {
   //Messages
   push();
   noStroke();
-  textSize(height/70);
+  textSize(height/65);
   
   if (displayMessage && timer < displayTime){
     fill(220, 220);
@@ -480,7 +480,7 @@ class Key{
       
       rect(this.x, this.y, this.size, unit*10, unit/2);
       fill(230);
-      textSize(height/75);
+      textSize(height/72);
       text(this.char, this.x + this.size/2, this.y+unit*5);
     }
     pop();
