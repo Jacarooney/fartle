@@ -37,6 +37,8 @@ function setup() {
   textAlign(CENTER, CENTER);
   rectMode(CENTER);
   
+  pixelDensity(1);
+  
   unit = height/200;
   
   textSize(windowHeight/19);
