@@ -250,7 +250,7 @@ function keyPressed(){
               }
             } else {
               tiles[currentRow*5+i].state = "filled";
-              if(keyboard[currentLetters[i]].state != "match" || 
+              if(keyboard[currentLetters[i]].state != "match" && 
                 keyboard[currentLetters[i]].state != "perfect"){
                   keyboard[currentLetters[i]].state = "filled";
               }
@@ -415,7 +415,7 @@ function mousePressed(){
               }
             } else {
               tiles[currentRow*5+i].state = "filled";
-              if(keyboard[currentLetters[i]].state != "match" || 
+              if(keyboard[currentLetters[i]].state != "match" && 
                 keyboard[currentLetters[i]].state != "perfect"){
                   keyboard[currentLetters[i]].state = "filled";
               }
