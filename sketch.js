@@ -152,7 +152,7 @@ function draw() {
   //Heading
   fill(230);
   textSize(height/20);
-  text("WORDY", width/2, height/28);
+  text("FARTLE", width/2, height/28);
   stroke(100);
   line(width/2 - 1.43*tW, height/15, width/2 + 1.43*tW, height/15);
   
